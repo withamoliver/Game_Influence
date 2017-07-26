@@ -1,0 +1,81 @@
+Using 1000000 as the number of Monte Carlo statistics.
+Using 12 as the total number of players.
+Generating 7 different distributions.
+
+DISCRETE
+Percentage of games that are definite wins is 29 %
+Percentage of games that are definite losses is 29 %
+Percentage of games that you can influence is 41 %
+
+Now assuming perfect play (you always score a 1):
+Percentage of games that you will win is 70 %
+Percentage of games that you will lose is 29 %
+Saved histogram of Monte Carlo data to figure_0_1000000.png 
+
+
+UNIFORM
+Percentage of games that are definite wins is 30 %
+Percentage of games that are definite losses is 30 %
+Percentage of games that you can influence is 39 %
+
+Now assuming perfect play (you always score a 1):
+Percentage of games that you will win is 69 %
+Percentage of games that you will lose is 30 %
+Saved histogram of Monte Carlo data to figure_1_1000000.png 
+
+
+TRUNCATED NORMAL DISTRIBUTION WITH SCALE 0.25
+Percentage of games that are definite wins is 11 %
+Percentage of games that are definite losses is 11 %
+Percentage of games that you can influence is 77 %
+
+Now assuming perfect play (you always score a 1):
+Percentage of games that you will win is 88 %
+Percentage of games that you will lose is 11 %
+Saved histogram of Monte Carlo data to figure_2_1000000.png 
+
+
+TRUNCATED NORMAL DISTRIBUTION WITH SCALE 0.5
+Percentage of games that are definite wins is 24 %
+Percentage of games that are definite losses is 24 %
+Percentage of games that you can influence is 50 %
+
+Now assuming perfect play (you always score a 1):
+Percentage of games that you will win is 75 %
+Percentage of games that you will lose is 24 %
+Saved histogram of Monte Carlo data to figure_3_1000000.png 
+
+
+TRUNCATED NORMAL DISTRIBUTION WITH SCALE 1
+Percentage of games that are definite wins is 29 %
+Percentage of games that are definite losses is 29 %
+Percentage of games that you can influence is 41 %
+
+Now assuming perfect play (you always score a 1):
+Percentage of games that you will win is 70 %
+Percentage of games that you will lose is 29 %
+Saved histogram of Monte Carlo data to figure_4_1000000.png 
+
+
+TRUNCATED NORMAL DISTIBUTION WITH SCALE 2
+Percentage of games that are definite wins is 29 %
+Percentage of games that are definite losses is 30 %
+Percentage of games that you can influence is 40 %
+
+Now assuming perfect play (you always score a 1):
+Percentage of games that you will win is 69 %
+Percentage of games that you will lose is 30 %
+Saved histogram of Monte Carlo data to figure_5_1000000.png 
+
+
+TRUNCATED NORMAL DISTRIBUTION WITH SCALE 4
+Percentage of games that are definite wins is 30 %
+Percentage of games that are definite losses is 30 %
+Percentage of games that you can influence is 39 %
+
+Now assuming perfect play (you always score a 1):
+Percentage of games that you will win is 69 %
+Percentage of games that you will lose is 30 %
+Saved histogram of Monte Carlo data to figure_6_1000000.png 
+
+
