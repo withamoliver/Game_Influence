@@ -14,14 +14,14 @@ from scipy.stats import truncnorm
 
 # These are all the user defined variables, the number of Monte Carlo statistics, the distributions we
 # wish to consider, and the number of other players in the game e.g. 11 for Overwatch, 9 for Dota
-M=100000
+M=10000
 distribution_names=["discrete","uniform","truncated normal distribution with scale 0.25", \
         "truncated normal distribution with scale 0.5","truncated normal distribution with scale 1", \
         "truncated normal distibution with scale 2", "truncated normal distribution with scale 4"]
 distributions=["random.choice([-1,0,1])","random.uniform(-1,1)","truncnorm.rvs(-4,4,scale=0.25)", \
         "truncnorm.rvs(-2,2,scale=0.5)","truncnorm.rvs(-1,1,scale=1)", \
         "truncnorm.rvs(-0.5,0.5,scale=2)","truncnorm.rvs(-0.25,0.25,scale=4)"] 
-number_of_other_players=9 # 11 for Overwatch, 9 for Dota etc
+number_of_other_players=11 # 11 for Overwatch, 9 for Dota etc
 
 scores=[0]*len(distributions)
 definite_losses=[0]*len(distributions)
@@ -35,14 +35,11 @@ print "Generating",len(distributions),"different distributions.\n"
 
 for n in range(M):
     for other_players in range(number_of_other_players):
-        count=0
-        for dist in distributions:
+        for count, dist in enumerate(distributions):
             monte_carlo_statistic=eval(dist)
             monte_carlo_distribution[count][n]=monte_carlo_statistic
             scores[count]=scores[count]+monte_carlo_statistic
-            count=count+1
-    count=0
-    for score in scores:
+    for count, score in enumerate(scores):
         if 1 < score <= number_of_other_players:
             definite_wins[count]=definite_wins[count]+1
         elif (-1)*number_of_other_players <= score < -1:
@@ -51,19 +48,17 @@ for n in range(M):
             games_you_can_influence[count]=games_you_can_influence[count]+1
         else:
             exit("Score too big or too small.")
-        count=count+1
     scores=[0]*len(distributions)
 
-count=0
-for dist in distribution_names:
+for count, dist in enumerate(distribution_names):
     print dist.upper()
-    print "Percentage of games that are definite wins is",100*definite_wins[count]/M,"\b%"
-    print "Percentage of games that are definite losses is",100*definite_losses[count]/M,"\b%"
-    print "Percentage of games that you can influence is",100*games_you_can_influence[count]/M,"\b%\n"
+    print "Percentage of games that are definite wins is",100*float(definite_wins[count])/M,"\b%"
+    print "Percentage of games that are definite losses is",100*float(definite_losses[count])/M,"\b%"
+    print "Percentage of games that you can influence is",100*float(games_you_can_influence[count])/M,"\b%\n"
     print "Now assuming perfect play (you always score a 1):"
-    print "Percentage of games that you will win is",100*(definite_wins[count]+ \
+    print "Percentage of games that you will win is",100*(float(definite_wins[count])+ \
         games_you_can_influence[count])/M,"\b%"
-    print "Percentage of games that you will lose is",100*definite_losses[count]/M,"\b%\n"
+    print "Percentage of games that you will lose is",100*float(definite_losses[count])/M,"\b%\n"
     # test values for the bw_method option ('None' is the default value)
     bw_values =  [None, 0.1, 0.01]
     # generate a list of kde estimators for each bw
@@ -83,4 +78,3 @@ for dist in distribution_names:
     plt.savefig(filename)
     print "Saved histogram of Monte Carlo data to",filename,"\n\n"
     plt.clf()
-    count=count+1
