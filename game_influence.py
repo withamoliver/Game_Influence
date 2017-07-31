@@ -14,7 +14,7 @@ from scipy.stats import truncnorm
 
 # These are all the user defined variables, the number of Monte Carlo statistics, the distributions we
 # wish to consider, and the number of other players in the game e.g. 11 for Overwatch, 9 for Dota
-M=10000
+M=100000
 distribution_names=["discrete","uniform","truncated normal distribution with scale 0.25", \
         "truncated normal distribution with scale 0.5","truncated normal distribution with scale 1", \
         "truncated normal distibution with scale 2", "truncated normal distribution with scale 4"]
@@ -31,7 +31,8 @@ monte_carlo_distribution=[[0]*M for i in range(len(distributions))] # has dimens
 
 print "Using",M,"as the number of Monte Carlo statistics."
 print "Using",number_of_other_players+1,"as the total number of players."
-print "Generating",len(distributions),"different distributions.\n"
+print "Using",len(distributions),"different distributions."
+print "Printing progress of the Monte Carlo simulation:\n"
 
 for n in range(M):
     for other_players in range(number_of_other_players):
@@ -49,7 +50,12 @@ for n in range(M):
         else:
             exit("Score too big or too small.")
     scores=[0]*len(distributions)
+    # Add a progress indicator
+    if n!=0:
+        if n%(M/100)==0:
+            print (100*n)/M,"\b% done."
 
+print ""
 for count, dist in enumerate(distribution_names):
     print dist.upper()
     print "Percentage of games that are definite wins is",100*float(definite_wins[count])/M,"\b%"
@@ -60,7 +66,7 @@ for count, dist in enumerate(distribution_names):
         games_you_can_influence[count])/M,"\b%"
     print "Percentage of games that you will lose is",100*float(definite_losses[count])/M,"\b%\n"
     # test values for the bw_method option ('None' is the default value)
-    bw_values =  [None, 0.1, 0.01]
+    bw_values =  [0.1]
     # generate a list of kde estimators for each bw
     kde = [scipy.stats.gaussian_kde(monte_carlo_distribution[count],bw_method=bw) for bw in bw_values]
     # plot (normalized) histogram of the data
@@ -68,7 +74,7 @@ for count, dist in enumerate(distribution_names):
     # plot density estimates
     t_range = np.linspace(-2,8,200)
     for i, bw in enumerate(bw_values):
-        plt.plot(t_range,kde[i](t_range),lw=2, label='bw = '+str(bw))
+        plt.plot(t_range,kde[i](t_range),lw=2)
     plt.xlim(-1,6)
     plt.legend(loc='best')
     axes = plt.gca()
